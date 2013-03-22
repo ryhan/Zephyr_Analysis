@@ -1,6 +1,6 @@
 # dips.py
 
-import itertools
+import itertools, datetime
 import alldata
 import log
 
@@ -21,15 +21,15 @@ def mark():
     for (start, end) in dips:
       log.postDip([student], (start, end))
 
-# Group a sorted list of positive integers into a list of tuples of ranges
+# Group a sorted list of dates into a list of tuples of ranges
 # Example: [3, 4, 7, 8, 9, 14] -> [(3,4), (7, 9), (14, 14)]
 def groupDays(days):
   periods = [ ]
-  priorDay = -1
+  priorDay = datetime.date.min
   for day in days:
     if (len(periods) == 0):
       periods = [(day, day)]
-    elif (day > priorDay+1):
+    elif ((day - priorDay).days > 1):
       periods.append((day, day))
     else:
       (start, end) = periods[len(periods) - 1]
