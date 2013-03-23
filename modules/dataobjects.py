@@ -35,8 +35,7 @@ def make_date(date_string):
     month = months[date_parts[0]]
     day = date_parts[1][:-1]
     day = str(day) if  (len(day) == 2) else ('0' + str(day))
-
-    return month + day + year
+    return datetime.date(int(year), int(month), int(day))
 
 """
 Returns a list of open csv files
